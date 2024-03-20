@@ -1,0 +1,8 @@
+version: '3'
+services: 
+  Free4G-Server: 
+    image: aikocute/aikocutehotme:latest
+    volumes:
+      - ./config:/etc/Free4G-Server/
+    restart: always
+    network_mode: host
