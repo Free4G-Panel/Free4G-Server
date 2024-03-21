@@ -27,7 +27,7 @@ else
     echo -e "${red}System version not detected, please contact the script author!${plain}\n" && exit 1
 fi
 
-CONFIG_FILE="/etc/Free4G-Server/Free4G.yml"
+CONFIG_FILE="/etc/Free4G-Server/free4g.yml"
 
 # os version
 if [[ -f /etc/os-release ]]; then
@@ -111,7 +111,7 @@ update() {
 
 config() {
     echo "Free4G-Server will automatically attempt to restart after modifying the configuration"
-    nano /etc/Free4G-Server/Free4G.yml
+    nano /etc/Free4G-Server/free4g.yml
     sleep 1
     check_status
     case $? in
@@ -349,8 +349,8 @@ generate_config_file() {
     echo -e "${yellow}Free4G-Server Configuration File Wizard${plain}"
     echo -e "${red}Please read the following notes:${plain}"
     echo -e "${red}1. This feature is currently in testing${plain}"
-    echo -e "${red}2. The generated configuration file will be saved to /etc/Free4G-Server/Free4G.yml${plain}"
-    echo -e "${red}3. The original configuration file will be saved to /etc/Free4G-Server/Free4G.yml.bak${plain}"
+    echo -e "${red}2. The generated configuration file will be saved to /etc/Free4G-Server/free4g.yml${plain}"
+    echo -e "${red}3. The original configuration file will be saved to /etc/Free4G-Server/free4g.yml.bak${plain}"
     echo -e "${red}4. TLS is not currently supported${plain}"
     read -rp "Do you want to continue generating the configuration file? (y/n) " generate_config_file_continue
 
@@ -358,7 +358,7 @@ generate_config_file() {
         read -rp "Enter the number of nodes to configure: " num_nodes
 
         cd /etc/Free4G-Server
-        echo "Nodes:" > /etc/Free4G-Server/Free4G.yml
+        echo "Nodes:" > /etc/Free4G-Server/free4g.yml
 
         for (( i=1; i<=num_nodes; i++ )); do
             echo "Configuring Node $i..."
@@ -380,8 +380,8 @@ generate_config_file() {
                 * ) NodeType="V2ray"; DisableLocalREALITYConfig="false"; EnableVless="false"; EnableREALITY="false" ;;
             esac
 
-            cat <<EOF >> /etc/Free4G-Server/Free4G.yml
-  - PanelType: "Free4GPanel"
+            cat <<EOF >> /etc/Free4G-Server/free4g.yml
+  - PanelType: "AikoPanel"
     ApiConfig:
       ApiHost: "${ApiHost}"
       ApiKey: "${ApiKey}"
@@ -398,8 +398,8 @@ generate_config_file() {
         Show: true
       CertConfig:
         CertMode: none
-        CertFile: /etc/Free4G-Server/cert/Free4G_Server.cert
-        KeyFile: /etc/Free4G-Server/cert/Free4G_Server.key
+        CertFile: /etc/Free4G-Server/cert/free4g_server.cert
+        KeyFile: /etc/Free4G-Server/cert/free4g_server.key
 EOF
         done
     else
@@ -418,14 +418,14 @@ generate_x25519(){
 }
 
 generate_certificate(){
-    CONFIG_FILE="/etc/Free4G-Server/Free4G.yml"
+    CONFIG_FILE="/etc/Free4G-Server/free4g.yml"
     echo "Free4G-Server will automatically attempt to restart after generating the certificate"
-    read -p "Please enter the domain of Cert (default: Free4GPanel.com): " domain
+    read -p "Please enter the domain of Cert (default: Free4G.VN): " domain
     read -p "Please enter the expire of Cert in days (default: 90 days): " expire
 
     # Set default values
     if [ -z "$domain" ]; then
-        domain="Free4GPanel.com"
+        domain="Free4G.VN"
     fi
 
     if [ -z "$expire" ]; then
@@ -436,8 +436,8 @@ generate_certificate(){
     /usr/local/Free4G-Server/Free4G-Server cert --domain "$domain" --expire "$expire"
     sed -i "s|CertMode:.*|CertMode: file|" $CONFIG_FILE
     sed -i "s|CertDomain:.*|CertDomain: ${domain}|" $CONFIG_FILE
-    sed -i "s|CertFile:.*|CertFile: /etc/Free4G-Server/cert/Free4G_Server.cert|" $CONFIG_FILE
-    sed -i "s|KeyFile:.*|KeyFile: /etc/Free4G-Server/cert/Free4G_Server.key|" $CONFIG_FILE
+    sed -i "s|CertFile:.*|CertFile: /etc/Free4G-Server/cert/free4g_server.cert|" $CONFIG_FILE
+    sed -i "s|KeyFile:.*|KeyFile: /etc/Free4G-Server/cert/free4g_server.key|" $CONFIG_FILE
     echo -e "${green}Successful configs !${plain}"
     read -p "Press any key to return to the menu..."
     show_menu
@@ -445,12 +445,12 @@ generate_certificate(){
 
 generate_config_default(){
     echo -e "${yellow}Free4G-Server Default Configuration File Wizard${plain}"
-    # check /etc/Free4G-Server/Free4G.yml
-    if [[ -f /etc/Free4G-Server/Free4G.yml ]]; then
+    # check /etc/Free4G-Server/free4g.yml
+    if [[ -f /etc/Free4G-Server/free4g.yml ]]; then
         echo -e "${red}The configuration file already exists, please delete it first${plain}"
         read -p "${green} Do you want to delete it now? (y/n) ${plain}" delete_config
         if [[ $delete_config =~ "y"|"Y" ]]; then
-            rm -rf /etc/Free4G-Server/Free4G.yml
+            rm -rf /etc/Free4G-Server/free4g.yml
             echo -e "${green}The configuration file has been deleted${plain}"
             /usr/local/Free4G-Server/Free4G-Server config
             echo -e "${green}The default configuration file has been generated${plain}"

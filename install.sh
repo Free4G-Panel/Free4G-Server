@@ -141,8 +141,8 @@ install_Free4G-Server() {
     cp geoip.dat /etc/Free4G-Server/
     cp geosite.dat /etc/Free4G-Server/
 
-    if [[ ! -f /etc/Free4G-Server/Free4G.yml ]]; then
-        cp Free4G.yml /etc/Free4G-Server/
+    if [[ ! -f /etc/Free4G-Server/free4g.yml ]]; then
+        cp free4g.yml /etc/Free4G-Server/
         echo -e ""
         echo -e "For a fresh installation, please refer to the tutorial: https://github.com/Free4G-Panel/Free4G-Server and configure the necessary content"
     else

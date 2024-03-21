@@ -1,5 +1,5 @@
 Nodes:
-  - PanelType: "Free4GPanel" # Panel type: Free4GPanel
+  - PanelType: "AikoPanel" # Panel type: AikoPanel
     ApiConfig:
       ApiHost: "http://127.0.0.1:667"
       ApiKey: "123"
@@ -16,5 +16,5 @@ Nodes:
         Show: true
       CertConfig:
         CertMode: none # Option about how to get certificate: none, file
-        CertFile: /etc/Free4G-Server/cert/Free4G_Server.cert # Provided if the CertMode is file
-        KeyFile: /etc/Free4G-Server/cert/Free4G_Server.key
+        CertFile: /etc/Free4G-Server/cert/free4g_server.cert # Provided if the CertMode is file
+        KeyFile: /etc/Free4G-Server/cert/free4g_server.key

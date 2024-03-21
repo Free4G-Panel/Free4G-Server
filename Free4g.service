@@ -12,7 +12,7 @@ LimitRSS=infinity
 LimitCORE=infinity
 LimitNOFILE=999999
 WorkingDirectory=/usr/local/Free4G-Server/
-ExecStart=/usr/local/Free4G-Server/Free4G-Server --config /etc/Free4G-Server/Free4G.yml
+ExecStart=/usr/local/Free4G-Server/Free4G-Server --config /etc/Free4G-Server/free4g.yml
 Restart=on-failure
 RestartSec=10
 
