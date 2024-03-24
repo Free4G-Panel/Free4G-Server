@@ -420,12 +420,12 @@ generate_x25519(){
 generate_certificate(){
     CONFIG_FILE="/etc/Free4G-Server/free4g.yml"
     echo "Free4G-Server will automatically attempt to restart after generating the certificate"
-    read -p "Please enter the domain of Cert (default: Free4G.VN): " domain
+    read -p "Please enter the domain of Cert (default: aikopanel.com): " domain
     read -p "Please enter the expire of Cert in days (default: 90 days): " expire
 
     # Set default values
     if [ -z "$domain" ]; then
-        domain="Free4G.VN"
+        domain="aikopanel.com"
     fi
 
     if [ -z "$expire" ]; then
@@ -527,7 +527,7 @@ show_usage() {
 show_menu() {
     echo -e "
   ${green}Free4G-Server Backend Management Script, ${plain}${red}not for docker${plain}
---- https://github.com/Free4G-Panel/Free4G-Server ---
+--- https://github.com/AikoPanel/Free4G-Server ---
   ${green}0.${plain} Modify configuration
 ————————————————
   ${green}1.${plain} Install Free4G-Server
